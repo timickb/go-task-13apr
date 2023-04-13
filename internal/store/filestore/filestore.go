@@ -72,7 +72,7 @@ func (s *Store) DeleteUser(id string) error {
 		Id:          user.Id,
 		CreatedAt:   user.CreatedAt,
 		DisplayName: user.DisplayName,
-		Email:       user.DisplayName,
+		Email:       user.Email,
 	}
 
 	delete(s.data.List, id)

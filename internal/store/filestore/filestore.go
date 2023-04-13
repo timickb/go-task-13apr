@@ -52,9 +52,11 @@ func (s *Store) CreateUser(user models.User) (string, error) {
 	user.Id = userId
 
 	s.data.List[userId] = &user
+	s.data.Increment++
 
 	if err := s.commit(); err != nil {
 		delete(s.data.List, userId) // Rollback changes.
+		s.data.Increment--
 		return "", fmt.Errorf("err write store file: %w", err)
 	}
 	return userId, nil
